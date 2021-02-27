@@ -255,7 +255,7 @@ public:
 	{
 		return array[pl.i][pl.j];
 	}
-
+	 
 private:
 	int getHash(string h)
 	{
