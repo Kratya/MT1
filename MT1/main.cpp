@@ -114,7 +114,7 @@ public:
 			auto res = find_if(array[hash].begin(), array[hash].end(), [&](const VarTableElem& s)-> bool {return s.name == name; });
 			if (res == array[hash].end())
 			{
-				array[hash].push_back(VarTableElem(name, 0, 0));//если не нашли элемент, то добавляем его в таблицу
+				array[hash].push_back(VarTableElem(name, 1, 0));//если не нашли элемент, то добавляем его в таблицу
 				pl.j = array[hash].size() - 1;
 			}
 
@@ -123,7 +123,7 @@ public:
 
 		else 
 		{
-			array[hash].push_back(VarTableElem(name, 0, 0)); //если таблица пустая в начале, то ниего не ищем и просто добавлем элемент
+			array[hash].push_back(VarTableElem(name, 1, 0)); //если таблица пустая в начале, то ниего не ищем и просто добавлем элемент
 			pl.j = 0;
 		}
 		return pl; //возвращаем координаты элемента
@@ -171,10 +171,10 @@ public:
 		pl.i = hash;
 		if (array[hash].size())//если по значению i строка не пустая в таблице, то запускаем поиск
 		{
-			auto res = find(array[hash].begin(), array[hash].end(), [&](const IntTableElem& s)-> bool {return s.value == tmp; });
+			auto res = find_if(array[hash].begin(), array[hash].end(), [&](const IntTableElem& s)-> bool {return s.value == tmp; });
 			if (res == array[hash].end())
 			{
-				array[hash].push_back(IntTableElem("INT", 1,tmp));
+				array[hash].push_back(IntTableElem("INT", 2,tmp));
 				pl.j = array[hash].size() - 1;
 			}
 
@@ -183,7 +183,7 @@ public:
 
 		else 
 		{
-			array[hash].push_back(IntTableElem("INT", 1, tmp));
+			array[hash].push_back(IntTableElem("INT", 2, tmp));
 			pl.j = 0;
 		}
 		return pl;
@@ -230,10 +230,10 @@ public:
 		pl.i = hash;
 		if (array[hash].size())//если по значению i строка не пустая в таблице, то запускаем поиск
 		{
-			auto res = find(array[hash].begin(), array[hash].end(), [&](const FloatTableElem& s)-> bool {return s.value == tmp; });
+			auto res = find_if(array[hash].begin(), array[hash].end(), [&](const FloatTableElem& s)-> bool {return s.value == tmp; });
 			if (res == array[hash].end())
 			{
-				array[hash].push_back(FloatTableElem("FLOAT", 2, tmp));
+				array[hash].push_back(FloatTableElem("FLOAT", 3, tmp));
 				pl.j = array[hash].size() - 1;
 			}
 
@@ -242,7 +242,7 @@ public:
 
 		else
 		{
-			array[hash].push_back(FloatTableElem("FLOAT", 2, tmp));
+			array[hash].push_back(FloatTableElem("FLOAT", 3, tmp));
 			pl.j = 0;
 		}
 		return pl;
@@ -306,7 +306,7 @@ int main()
 	int index;
 
 
-	
+	/*
 	for (unsigned int i = 0; i < lexeme->keyWords->array.size(); i++)
 		cout << lexeme->keyWords->array[i]<<endl;
 	index = lexeme->keyWords->findElem("break");
@@ -321,10 +321,10 @@ int main()
 		cout << lexeme->operations->array[i] << endl;
 	index = lexeme->operations->findElem("*=");
 	cout << "place=" << index << endl << endl;
-	
+	*/
 	
 
-	/*
+	
 	cout << "-----------------------------------------" << endl;
 	place pl;
 	pl = lexeme->tableInt->findElem("5");
@@ -340,7 +340,7 @@ int main()
 			cout << j << ":" << "(" << lexeme->tableInt->array[i][j].value << ") ";
 		cout << endl;
 	}	
-	*/
+	
 	//cout << "-----------------------------------------" << endl;
 
 	/*
@@ -369,10 +369,11 @@ int main()
 
 */
 	//cout << "-----------------------------------------" << endl;
+	
 	/*
 	token a = token(0, 1, 1);
 	lexeme->getElemByToken(a);
-	cout << "name=" << lexeme->str << "  is_value=" << lexeme->var.value << endl;
+	cout << "name=" << lexeme->str << "  is_value=" << lexeme->var.value << "  is_type= " <<  lexeme->var.type << endl;
 	*/
 	system("pause");
 	return 0;
